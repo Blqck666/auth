@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
                 if (err) throw err;
                     var idd = data.id;
 
-                var myobj = { id: data.id, username: data.name , email: data.email };
+                var myobj = { id: data.id, username: data.name , email: data.email , img : data.img};
                     db.collection("user").findOne({id:idd}).then(function(doc) 
                     {
                         if(!doc)
