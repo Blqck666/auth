@@ -1,4 +1,4 @@
-var port = process.env.OPENSHIFT_NODEJS_PORT || 5057;
+var port = process.env.PORT || 8080;
 var IPADDRESS = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var io = require('socket.io')(port);
 var shortId = require('shortid');
