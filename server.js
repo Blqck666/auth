@@ -72,13 +72,13 @@ io.on('connection', function (socket) {
             {
                 if (err) throw err;
                     var idd = data.id;
-
+                    console.log(data.birthday);
                 var myobj = { id: data.id, username: data.name , work: data.work , img : data.img , gender : data.gender , birthday:data.birthday};
-                    db.collection("user").findOne({id:idd}).then(function(doc) 
+                    db.collection("Users").findOne({id:idd}).then(function(doc) 
                     {
                         if(!doc)
                         {
-                                db.collection("user").insertOne(myobj, function(err, res) 
+                                db.collection("Users").insertOne(myobj, function(err, res) 
                                 {
                                         if (err) throw err;
                                         console.log("1 record inserted");
