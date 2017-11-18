@@ -28,9 +28,12 @@ console.log("Server started at port : " + port);
 
 
 io.on('connection', function (socket) {
-    var roomDistance;
-    var thisPlayerId = shortId.generate();
-    var player = {
+
+
+
+var roomDistance;
+        var thisPlayerId = shortId.generate();
+        var player = {
         sockid:socket.id,
         id:thisPlayerId,
         destination:{
@@ -45,20 +48,38 @@ io.on('connection', function (socket) {
         lat : 0,
         lan : 0,
         name : ""
-    };
-    players[thisPlayerId] = player;
+        };
+        players[thisPlayerId] = player;
     
-    console.log("client connected, id = ", thisPlayerId);
-   
-    socket.emit('register', {id:thisPlayerId});
-    socket.broadcast.emit('spawn', {id:thisPlayerId});
-    socket.broadcast.emit('requestPosition');
-    
+    console.log("First Sceene connection with Player Id = " + thisPlayerId);
+
+
+    console.log("////////////////////////////////////////////////////");
+    console.log("////////////////////////////////////////////////////");
+    console.log("////////////////////////////////////////////////////");
+
+
     for(var playerId in players){
-        if(playerId == thisPlayerId)
-            continue;
-        socket.emit('spawn', players[playerId]);
-    };
+            console.log("All Connected Players " + playerId)
+        };
+    
+
+    socket.on('zebi', function()
+    {
+        
+        console.log("client connected, id = ", thisPlayerId);
+   
+        socket.emit('register', {id:thisPlayerId});
+        socket.broadcast.emit('spawn', {id:thisPlayerId});
+        socket.broadcast.emit('requestPosition');
+    
+        for(var playerId in players){
+            if(playerId == thisPlayerId)
+                continue;
+            socket.emit('spawn', players[playerId]);
+        };
+    });
+    
 
         //hathi tab3eth marra kahw wa9ti player yconnecti
         //lazem kif lplayer yconnecti w yo9res 3la location ya3mel verification w yab3eth spawn ll player jdid
