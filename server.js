@@ -48,7 +48,8 @@ var roomDistance;
         lat : 0,
         lan : 0,
         name : "",
-        index :0
+        index :0,
+        FBID : ""
         };
         players[thisPlayerId] = player;
     
@@ -72,7 +73,7 @@ var roomDistance;
    
         socket.emit('register', {id:thisPlayerId});
         console.log(players[thisPlayerId].index);
-        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index});
+        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index,index:players[thisPlayerId].FBID});
         socket.broadcast.emit('requestPosition');
     
         for(var playerId in players){
@@ -101,6 +102,7 @@ var roomDistance;
             indexchar = 0;
         }
         players[thisPlayerId].index = indexchar;
+        players[thisPlayerId].FBID = id;
             MongoClient.connect('mongodb://pokemap:fucksatan001@ds032887.mlab.com:32887/pokemap', function(err, db) 
             {
                 if (err) throw err;
