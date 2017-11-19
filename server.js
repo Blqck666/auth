@@ -73,7 +73,7 @@ var roomDistance;
    
         socket.emit('register', {id:thisPlayerId});
         console.log(players[thisPlayerId].index);
-        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index,index:players[thisPlayerId].FBID});
+        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index,FBID:players[thisPlayerId].FBID});
         socket.broadcast.emit('requestPosition');
     
         for(var playerId in players){
