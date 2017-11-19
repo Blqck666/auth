@@ -71,6 +71,7 @@ var roomDistance;
         console.log("client connected, id = ", thisPlayerId);
    
         socket.emit('register', {id:thisPlayerId});
+        console.log(players[thisPlayerId].index);
         socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index});
         socket.broadcast.emit('requestPosition');
     
