@@ -102,7 +102,7 @@ var roomDistance;
             indexchar = 0;
         }
         players[thisPlayerId].index = indexchar;
-        players[thisPlayerId].FBID = id;
+        players[thisPlayerId].FBID = data.id;
             MongoClient.connect('mongodb://pokemap:fucksatan001@ds032887.mlab.com:32887/pokemap', function(err, db) 
             {
                 if (err) throw err;
