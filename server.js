@@ -47,7 +47,8 @@ var roomDistance;
         lastMoveTime : 0,
         lat : 0,
         lan : 0,
-        name : ""
+        name : "",
+        index :0
         };
         players[thisPlayerId] = player;
     
@@ -89,12 +90,22 @@ var roomDistance;
     socket.on('login', function(data)
     {
         console.log(data.id);
+        if(data.gender == "male")
+        {
+            indexchar = 1;
+
+        }
+        else
+        {
+            indexchar = 0;
+        }
+        players[thisPlayerId].index = indexchar;
             MongoClient.connect('mongodb://pokemap:fucksatan001@ds032887.mlab.com:32887/pokemap', function(err, db) 
             {
                 if (err) throw err;
                     var idd = data.id;
                     console.log(data.birthday);
-                var myobj = { id: data.id, username: data.name , work: data.work , img : data.img , gender : data.gender , birthday:data.birthday};
+                var myobj = { id: data.id, username: data.name , work: data.work , img : data.img , gender : data.gender , birthday:data.birthday,SelectedChar : indexchar };
                     db.collection("Users").findOne({id:idd}).then(function(doc) 
                     {
                         if(!doc)
