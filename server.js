@@ -49,7 +49,8 @@ var roomDistance;
         lan : 0,
         name : "",
         index :0,
-        FBID : ""
+        FBID : "",
+        connectSec : 0
         };
         players[thisPlayerId] = player;
     
@@ -68,12 +69,12 @@ var roomDistance;
 
     socket.on('zebi', function()
     {
-        
+        players[thisPlayerId].connectSec = 1;
         console.log("client connected, id = ", thisPlayerId);
    
         socket.emit('register', {id:thisPlayerId});
         console.log(players[thisPlayerId].index);
-        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index,FBID:players[thisPlayerId].FBID});
+        socket.broadcast.emit('spawn', {id:thisPlayerId,index:players[thisPlayerId].index,FBID:players[thisPlayerId].FBID,CanShow:players[thisPlayerId].connectSec});
         socket.broadcast.emit('requestPosition');
     
         for(var playerId in players){
